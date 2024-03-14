@@ -3,5 +3,9 @@ import 'package:blink2/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp( BlinkApp(appRouter: AppRouter(),));
+  runApp(
+    BlinkApp(
+      appRouter: AppRouter(),
+    ),
+  );
 }
