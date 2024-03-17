@@ -20,6 +20,7 @@ class SignUpScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     DateTime? dob;
 
     return Padding(
