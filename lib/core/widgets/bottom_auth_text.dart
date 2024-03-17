@@ -1,5 +1,6 @@
 import 'package:blink2/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BottomAuthText extends StatelessWidget {
   const BottomAuthText({
@@ -14,7 +15,7 @@ class BottomAuthText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30),
+      padding:  EdgeInsets.only(left: 30.w),
       child: Container(
         alignment: Alignment.centerLeft,
         child: GestureDetector(
