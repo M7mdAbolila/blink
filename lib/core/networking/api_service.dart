@@ -9,7 +9,9 @@ class ApiService {
     'Content-Type': 'application/x-www-form-urlencoded',
     'api_key': "ElGamdeeeenFash5",
   };
-  Future post({required String endPoint,required Map<String,dynamic> body}) async {
+  // Future<Map<String, dynamic>>
+  Future post(
+      {required String endPoint, required Map<String, dynamic> body}) async {
     var response = await _dio.post(
       '$_baseUrl$endPoint',
       options: Options(headers: headers),
