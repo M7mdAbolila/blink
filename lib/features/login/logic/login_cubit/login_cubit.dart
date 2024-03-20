@@ -8,16 +8,16 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
-  Future<void> login(
-    context, {
+  Future<void> login({
     required String email,
     required String password,
   }) async {
+    emit(LoginLoading());
     var result = await LoginRepo(ApiService(Dio())).login(
       email: email,
       password: password,
     );
-    emit(LoginLoading());
+
     result.fold(
       (failure) => emit(
         LoginFailure(failure.errMessage),

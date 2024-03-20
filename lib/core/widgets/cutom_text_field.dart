@@ -22,6 +22,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       controller: widget.contorller,
       obscureText: passwordVisible,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Field cannot be empty';
+        }
+        return null;
+      },
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 25,
@@ -43,13 +49,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ],
           ),
         ),
-        suffixIcon: IconButton(
-          onPressed: () {
+        suffixIcon: GestureDetector(
+          onTap: () {
             setState(() {
               passwordVisible = !passwordVisible;
             });
           },
-          icon: widget.isPassword
+          child: widget.isPassword
               ? passwordVisible
                   ? Image.asset('assets/images/eye_off.png')
                   : Image.asset('assets/images/eye.png')

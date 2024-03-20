@@ -18,7 +18,7 @@ class LoginRepo {
           'password': password,
         },
       );
-      return response['code'];
+      return right(response['code']);
     } catch (e) {
       if (e is DioException) {
         return left(
