@@ -1,5 +1,6 @@
 import 'package:blink2/core/networking/api_service.dart';
 import 'package:blink2/core/networking/failure.dart';
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class LoginRepo {
@@ -7,7 +8,8 @@ class LoginRepo {
 
   LoginRepo(this.apiService);
 
-  Future login({required String email, required String password}) async {
+  Future<Either<Failure, int>> login(
+      {required String email, required String password}) async {
     try {
       var response = await apiService.post(
         endPoint: 'login',
@@ -19,9 +21,13 @@ class LoginRepo {
       return response['code'];
     } catch (e) {
       if (e is DioException) {
-        return ServerFailure.fromDioError(e);
+        return left(
+          ServerFailure.fromDioError(e),
+        );
       } else {
-        return ServerFailure(e.toString());
+        return left(
+          ServerFailure(e.toString()),
+        );
       }
     }
   }
