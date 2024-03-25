@@ -4,12 +4,12 @@ import 'package:blink2/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class SignUPRepoImpl implements SignUpRepo {
+class SignUpRepoImpl implements SignUpRepo {
   final ApiService apiService;
 
-  SignUPRepoImpl(this.apiService);
+  SignUpRepoImpl(this.apiService);
   @override
-  Future<Either<Failure, int>> signUp({
+  Future<Either<Failure, dynamic>> addUser({
     required String email,
     required String password,
     required String username,
@@ -18,7 +18,7 @@ class SignUPRepoImpl implements SignUpRepo {
   }) async {
     try {
       var response = await apiService.post(
-        endPoint: 'signup',
+        endPoint: 'users',
         body: {
           'email': email,
           'password': password,
@@ -42,14 +42,14 @@ class SignUPRepoImpl implements SignUpRepo {
   }
 
   @override
-  Future<Either<Failure, int>> userValidate({
+  Future<Either<Failure, dynamic>> userValidate({
     required String email,
     required String username,
     required String phone,
   }) async {
     try {
       var response = await apiService.post(
-        endPoint: 'user-validate',
+        endPoint: 'users/validate',
         body: {
           'email': email,
           'username': username,
@@ -71,15 +71,16 @@ class SignUPRepoImpl implements SignUpRepo {
   }
 
   @override
-  Future<Either<Failure, int>> validateAnEmail({
+  Future<Either<Failure, dynamic>> emailValidate({
     required String email,
-    required int secretCode,
+    required String secretCode,
   }) async {
     try {
       var response = await apiService.post(
-        endPoint: 'email/$email',
+        endPoint: 'users/email-check',
         body: {
-          'secret': secretCode,
+          'secret': int.parse(secretCode),
+          'email': email,
         },
       );
       return right(response['code']);

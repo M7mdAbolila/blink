@@ -8,11 +8,11 @@ class LoginRepo {
 
   LoginRepo(this.apiService);
 
-  Future<Either<Failure, int>> login(
+  Future<Either<Failure, dynamic>> login(
       {required String email, required String password}) async {
     try {
       var response = await apiService.post(
-        endPoint: 'login',
+        endPoint: 'users/authenticate',
         body: {
           'email': email,
           'password': password,

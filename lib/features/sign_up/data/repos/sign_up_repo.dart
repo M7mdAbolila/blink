@@ -2,16 +2,16 @@ import 'package:blink2/core/networking/failure.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class SignUpRepo {
-  Future<Either<Failure, int>> userValidate({
+  Future<Either<Failure, dynamic>> userValidate({
     required String email,
     required String username,
     required String phone,
   });
-  Future<Either<Failure, int>> validateAnEmail({
+  Future<Either<Failure, dynamic>> emailValidate({
     required String email,
-    required int secretCode,
+    required String secretCode,
   });
-  Future<Either<Failure, int>> signUp({
+  Future<Either<Failure, dynamic>> addUser({
     required String email,
     required String password,
     required String username,

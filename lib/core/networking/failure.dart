@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 
 abstract class Failure {
@@ -42,7 +43,8 @@ class ServerFailure extends Failure {
         statusCode == 403 ||
         statusCode == 404 ||
         statusCode == 409) {
-      return ServerFailure(response['code'].toString());
+      var code = response['code'];
+      return ServerFailure('$code');
     } else if (statusCode == 500) {
       return ServerFailure('Internal Server error, Please try later');
     } else {

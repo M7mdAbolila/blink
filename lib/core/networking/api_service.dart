@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
-  final _baseUrl = 'https://blink-blog-website.glitch.me/api/';
+  final _baseUrl = 'http://51.21.147.29/api/v1/';
 
   final Dio _dio;
   ApiService(this._dio);
