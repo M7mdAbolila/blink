@@ -1,8 +1,8 @@
 import 'package:blink2/core/helpers/text_field_decor.dart';
 import 'package:flutter/material.dart';
 
-class PhoneTextField extends StatefulWidget {
-  const PhoneTextField({
+class AppTextField extends StatefulWidget {
+  const AppTextField({
     super.key,
     required this.labelText,
     required this.contorller,
@@ -11,20 +11,17 @@ class PhoneTextField extends StatefulWidget {
 
   final TextEditingController contorller;
   @override
-  State<PhoneTextField> createState() => _PhoneTextFieldState();
+  State<AppTextField> createState() => _AppTextFieldState();
 }
 
-class _PhoneTextFieldState extends State<PhoneTextField> {
+class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.contorller,
-      keyboardType: TextInputType.number,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Field cannot be empty';
-        } else if (value.length > 11 || value.length < 11) {
-          return 'Phone must be 11 digit';
         }
         return null;
       },

@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class BlinkApp extends StatelessWidget {
   final AppRouter appRouter;
   const BlinkApp({super.key, required this.appRouter});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -19,7 +18,7 @@ class BlinkApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: appRouter.generateRoute,
-        initialRoute: Routes.signUpScreen,
+        initialRoute: Routes.loginScreen,
       ),
     );
   }

@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
-class CustomTextField extends StatefulWidget {
-  const CustomTextField({
+class PassTextField extends StatefulWidget {
+  const PassTextField({
     super.key,
-    required this.isPassword,
     required this.labelText,
     required this.contorller,
   });
   final String labelText;
-  final bool isPassword;
   final TextEditingController contorller;
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<PassTextField> createState() => _PassTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _PassTextFieldState extends State<PassTextField> {
   bool passwordVisible = false;
   @override
   Widget build(BuildContext context) {
@@ -25,6 +23,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Field cannot be empty';
+        } else if (value.length <= 8) {
+          return 'Password must be over 8 characters and digits';
         }
         return null;
       },
@@ -50,17 +50,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         ),
         suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              passwordVisible = !passwordVisible;
-            });
-          },
-          child: widget.isPassword
-              ? passwordVisible
-                  ? Image.asset('assets/images/eye_off.png')
-                  : Image.asset('assets/images/eye.png')
-              : const SizedBox(),
-        ),
+            onTap: () {
+              setState(() {
+                passwordVisible = !passwordVisible;
+              });
+            },
+            child: passwordVisible
+                ? Image.asset('assets/images/eye_off.png')
+                : Image.asset('assets/images/eye.png')),
       ),
     );
   }

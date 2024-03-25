@@ -6,7 +6,8 @@ import 'package:blink2/core/widgets/app_logo.dart';
 import 'package:blink2/core/widgets/bottom_auth_text.dart';
 import 'package:blink2/core/widgets/custom_auth_button.dart';
 import 'package:blink2/core/widgets/custom_text_auth.dart';
-import 'package:blink2/core/widgets/cutom_text_field.dart';
+import 'package:blink2/core/widgets/app_text_field.dart';
+import 'package:blink2/core/widgets/pass_text_field.dart';
 import 'package:blink2/features/sign_up/logic/add_user_cubit/add_user_cubit.dart';
 import 'package:blink2/features/sign_up/logic/email_validate_cubit/email_validate_cubit.dart';
 import 'package:blink2/features/sign_up/logic/user_validate_cubit/user_validate_cubit.dart';
@@ -33,8 +34,6 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
   late final DateTime dob;
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 51.w),
       child: Center(
@@ -45,42 +44,39 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const AppLogo(),
-                verticalSpace(103),
+                verticalSpace(70),
                 CustomTextAuth(
                   text: 'SIGN UP',
                   color: AppColors.kGrayColor,
                   size: 36.sp,
                   fontWeight: FontWeight.w500,
                 ),
-                verticalSpace(55),
-                CustomTextField(
+                verticalSpace(45),
+                AppTextField(
                   labelText: 'Username',
                   contorller: username,
-                  isPassword: false,
                 ),
-                verticalSpace(25),
+                verticalSpace(20),
                 PhoneTextField(
                   labelText: 'Phone',
                   contorller: phone,
                 ),
-                verticalSpace(25),
-                CustomTextField(
+                verticalSpace(20),
+                AppTextField(
                   labelText: 'Email',
                   contorller: email,
-                  isPassword: false,
                 ),
-                verticalSpace(25),
-                CustomTextField(
+                verticalSpace(20),
+                PassTextField(
                   labelText: 'Create new password',
                   contorller: password,
-                  isPassword: true,
                 ),
                 verticalSpace(25),
                 DateOfBirthInput(
                   labelText: 'Select Date of birth',
                   onDateSelected: (data) => dob = data,
                 ),
-                verticalSpace(89),
+                verticalSpace(60),
                 CustomButton(
                   text: 'Let\'s Go!',
                   onTap: () async {

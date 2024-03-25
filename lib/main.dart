@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 void main() {
   setupServiceLocator();
-  runApp(BlinkApp(
-    appRouter: AppRouter(),
-  ));
-  
+  runApp(
+    BlinkApp(
+      appRouter: AppRouter(),
+    ),
+  );
 }

@@ -6,7 +6,8 @@ import 'package:blink2/core/widgets/app_logo.dart';
 import 'package:blink2/core/widgets/bottom_auth_text.dart';
 import 'package:blink2/core/widgets/custom_auth_button.dart';
 import 'package:blink2/core/widgets/custom_text_auth.dart';
-import 'package:blink2/core/widgets/cutom_text_field.dart';
+import 'package:blink2/core/widgets/app_text_field.dart';
+import 'package:blink2/core/widgets/pass_text_field.dart';
 import 'package:blink2/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:blink2/features/login/ui/widgets/forgert_pass_widget.dart';
 import 'package:flutter/material.dart';
@@ -41,27 +42,25 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const AppLogo(),
-                verticalSpace(103),
+                verticalSpace(80),
                 const CustomTextAuth(
                   text: 'SIGN IN',
                   color: AppColors.kGrayColor,
                   size: 36,
                   fontWeight: FontWeight.w500,
                 ),
-                verticalSpace(55),
-                CustomTextField(
+                verticalSpace(45),
+                AppTextField(
                   labelText: 'email',
                   contorller: email,
-                  isPassword: false,
                 ),
-                verticalSpace(25),
-                CustomTextField(
+                verticalSpace(20),
+                PassTextField(
                   labelText: 'password',
                   contorller: password,
-                  isPassword: true,
                 ),
                 const ForgetPassWidget(),
-                verticalSpace(89),
+                verticalSpace(70),
                 CustomButton(
                   text: 'Sign in',
                   onTap: () {
