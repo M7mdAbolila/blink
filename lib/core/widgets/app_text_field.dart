@@ -6,9 +6,10 @@ class AppTextField extends StatefulWidget {
     super.key,
     required this.labelText,
     required this.contorller,
+    required this.textInputType,
   });
   final String labelText;
-
+  final TextInputType textInputType;
   final TextEditingController contorller;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -19,6 +20,7 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.contorller,
+      keyboardType: widget.textInputType,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Field cannot be empty';

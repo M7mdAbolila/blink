@@ -1,19 +1,17 @@
+import 'package:blink2/core/helpers/calculate_age.dart';
+import 'package:blink2/core/helpers/custom_snack_bar.dart';
 import 'package:blink2/core/helpers/extensions.dart';
 import 'package:blink2/core/helpers/spacing.dart';
 import 'package:blink2/core/routing/routes.dart';
-import 'package:blink2/core/theme/colors.dart';
 import 'package:blink2/core/widgets/app_logo.dart';
 import 'package:blink2/core/widgets/bottom_auth_text.dart';
 import 'package:blink2/core/widgets/custom_auth_button.dart';
-import 'package:blink2/core/widgets/custom_text_auth.dart';
-import 'package:blink2/core/widgets/app_text_field.dart';
-import 'package:blink2/core/widgets/pass_text_field.dart';
 import 'package:blink2/features/sign_up/logic/add_user_cubit/add_user_cubit.dart';
 import 'package:blink2/features/sign_up/logic/email_validate_cubit/email_validate_cubit.dart';
 import 'package:blink2/features/sign_up/logic/user_validate_cubit/user_validate_cubit.dart';
 import 'package:blink2/features/sign_up/ui/widgets/date_of_birth_input.dart';
 import 'package:blink2/features/sign_up/ui/widgets/email_verify_widget.dart';
-import 'package:blink2/features/sign_up/ui/widgets/phone_text_field.dart';
+import 'package:blink2/features/sign_up/ui/widgets/info_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +29,7 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
   final phone = TextEditingController();
   final secretCode = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  late final DateTime dob;
+  DateTime dob = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -44,34 +42,11 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const AppLogo(),
-                verticalSpace(70),
-                CustomTextAuth(
-                  text: 'SIGN UP',
-                  color: AppColors.kGrayColor,
-                  size: 36.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-                verticalSpace(45),
-                AppTextField(
-                  labelText: 'Username',
-                  contorller: username,
-                ),
-                verticalSpace(20),
-                PhoneTextField(
-                  labelText: 'Phone',
-                  contorller: phone,
-                ),
-                verticalSpace(20),
-                AppTextField(
-                  labelText: 'Email',
-                  contorller: email,
-                ),
-                verticalSpace(20),
-                PassTextField(
-                  labelText: 'Create new password',
-                  contorller: password,
-                ),
-                verticalSpace(25),
+                InfoInputSection(
+                    username: username,
+                    phone: phone,
+                    email: email,
+                    password: password),
                 DateOfBirthInput(
                   labelText: 'Select Date of birth',
                   onDateSelected: (data) => dob = data,
@@ -80,16 +55,21 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                 CustomButton(
                   text: 'Let\'s Go!',
                   onTap: () async {
+                    int age = calculateAge(dob);
                     if (_formKey.currentState!.validate()) {
-                      await BlocProvider.of<UserValidateCubit>(context)
-                          .userValidate(
-                        email: email.text,
-                        username: username.text,
-                        phone: phone.text,
-                      );
-                      if (BlocProvider.of<UserValidateCubit>(context).state
-                          is UserValidateSuccess) {
-                        emailValidateBottomSheet(context);
+                      if (age < 18) {
+                        customSnackBar(context, 'Age must be 18 or over');
+                      } else {
+                        await BlocProvider.of<UserValidateCubit>(context)
+                            .userValidate(
+                          email: email.text,
+                          username: username.text,
+                          phone: phone.text,
+                        );
+                        if (BlocProvider.of<UserValidateCubit>(context).state
+                            is UserValidateSuccess) {
+                          emailValidateBottomSheet(context);
+                        }
                       }
                     }
                   },
@@ -107,7 +87,6 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
       ),
     );
   }
-
   Future<dynamic> emailValidateBottomSheet(BuildContext context) {
     return showModalBottomSheet<void>(
         context: context,

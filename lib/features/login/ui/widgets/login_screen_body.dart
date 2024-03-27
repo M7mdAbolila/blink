@@ -53,6 +53,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                 AppTextField(
                   labelText: 'email',
                   contorller: email,
+                  textInputType: TextInputType.emailAddress,
                 ),
                 verticalSpace(20),
                 PassTextField(
