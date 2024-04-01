@@ -29,7 +29,7 @@ class _OnboardingBottomSectionState extends State<OnboardingBottomSection> {
       color: Colors.white,
       height: 170.h,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,7 +49,7 @@ class _OnboardingBottomSectionState extends State<OnboardingBottomSection> {
                 curve: Curves.easeIn,
               ),
             ),
-            verticalSpace(30),
+            verticalSpace(40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

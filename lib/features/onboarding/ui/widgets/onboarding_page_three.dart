@@ -11,17 +11,17 @@ class OnboardingPageThree extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
+          verticalSpace(50),
           const OnboradingAppLogo(),
-          verticalSpace(60),
+          verticalSpace(47),
           Image.asset(
             'assets/images/onboarding_page_three.png',
             width: 340,
           ),
-          verticalSpace(70),
+          verticalSpace(51),
           SvgPicture.asset('assets/svgs/onboarding_capture.svg'),
-          verticalSpace(60),
+          verticalSpace(43),
           Image.asset('assets/images/onboarding_capture_text.png'),
         ],
       ),

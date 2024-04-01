@@ -18,28 +18,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isFirstScreen = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(bottom: 170.h),
-        child: PageView(
-          controller: pageController,
-          children: const [
-            OnboardingPageOne(),
-            OnboardingPageTwo(),
-            OnboardingPageThree(),
-          ],
-          onPageChanged: (page) {
-            setState(() {
-              isLastScreen = (page == 2);
-              isFirstScreen = (page == 0);
-            });
-          },
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          padding: EdgeInsets.only(bottom: 170.h, right: 20.w, left: 20.w),
+          child: PageView(
+            controller: pageController,
+            children: const [
+              OnboardingPageOne(),
+              OnboardingPageTwo(),
+              OnboardingPageThree(),
+            ],
+            onPageChanged: (page) {
+              setState(() {
+                isLastScreen = (page == 2);
+                isFirstScreen = (page == 0);
+              });
+            },
+          ),
         ),
-      ),
-      bottomSheet: OnboardingBottomSection(
-        pageController: pageController,
-        isLastScreen: isLastScreen,
-        isFirstScreen: isFirstScreen,
+        bottomSheet: OnboardingBottomSection(
+          pageController: pageController,
+          isLastScreen: isLastScreen,
+          isFirstScreen: isFirstScreen,
+        ),
       ),
     );
   }
