@@ -11,7 +11,7 @@ class GetStartedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         context.pushReplacementNamed(Routes.loginScreen);
       },
       child: Container(

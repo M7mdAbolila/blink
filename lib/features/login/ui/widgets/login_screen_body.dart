@@ -64,7 +64,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                 verticalSpace(70),
                 CustomButton(
                   text: 'Sign in',
-                  onTap: () {
+                  onTap: () async {
                     if (_formKey.currentState!.validate()) {
                       cubit.login(email: email.text, password: password.text);
                     }

@@ -1,4 +1,3 @@
-
 import 'package:blink2/core/helpers/custom_snack_bar.dart';
 import 'package:blink2/core/helpers/extensions.dart';
 import 'package:blink2/core/helpers/spacing.dart';
@@ -11,6 +10,7 @@ import 'package:blink2/features/sign_up/logic/email_validate_cubit/email_validat
 import 'package:blink2/features/sign_up/ui/widgets/verify_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EmailVerification extends StatefulWidget {
   const EmailVerification({
@@ -53,14 +53,16 @@ class _EmailVerificationState extends State<EmailVerification> {
           },
         ),
         BlocListener<AddUserCubit, AddUserState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is AddUserFailure) {
               context.pop();
               customSnackBar(context, state.errMessage);
             } else if (state is AddUserSuccess) {
               context.pop();
-              context.pushNamed(Routes.homeScreen);
+              context.pushReplacementNamed(Routes.homeScreen);
               customSnackBar(context, 'Add User Successfull');
+              final sharedPreferences = await SharedPreferences.getInstance();
+              sharedPreferences.setBool('onboarding', true);
             }
           },
         ),

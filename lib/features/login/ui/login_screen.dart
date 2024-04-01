@@ -6,6 +6,7 @@ import 'package:blink2/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:blink2/features/login/ui/widgets/login_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: BlocListener<LoginCubit, LoginState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is LoginLoading) {
           showDialog(
             barrierColor: AppColors.kOrangeColor.withOpacity(.2),
@@ -31,16 +32,16 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         } else if (state is LoginFailure) {
           context.pop();
-          setState(() {});
           if (state.errMessaeg == '1') {
             customSnackBar(context, 'Wrong Email or password');
           } else {
             customSnackBar(context, state.errMessaeg);
           }
         } else if (state is LoginSuccess) {
-          setState(() {});
           customSnackBar(context, 'Logged In Successfull');
-          context.pushNamed(Routes.homeScreen);
+          context.pushReplacementNamed(Routes.homeScreen);
+          final sharedPreferences = await SharedPreferences.getInstance();
+          sharedPreferences.setBool('onboarding', true);
         }
       },
       child: const LoginScreenBody(),
