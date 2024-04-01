@@ -59,10 +59,11 @@ class _EmailVerificationState extends State<EmailVerification> {
               customSnackBar(context, state.errMessage);
             } else if (state is AddUserSuccess) {
               context.pop();
-              context.pushReplacementNamed(Routes.homeScreen);
               customSnackBar(context, 'Add User Successfull');
               final sharedPreferences = await SharedPreferences.getInstance();
               sharedPreferences.setBool('onboarding', true);
+              context.pushNamedAndRemoveUntil(Routes.homeScreen,
+                  predicate: (route) => false);
             }
           },
         ),

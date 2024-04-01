@@ -12,7 +12,8 @@ class GetStartedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        context.pushReplacementNamed(Routes.loginScreen);
+        context.pushNamedAndRemoveUntil(Routes.loginScreen,
+            predicate: (route) => false);
       },
       child: Container(
         height: 60,

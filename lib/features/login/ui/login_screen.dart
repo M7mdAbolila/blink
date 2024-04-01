@@ -39,9 +39,10 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         } else if (state is LoginSuccess) {
           customSnackBar(context, 'Logged In Successfull');
-          context.pushReplacementNamed(Routes.homeScreen);
           final sharedPreferences = await SharedPreferences.getInstance();
           sharedPreferences.setBool('onboarding', true);
+          context.pushNamedAndRemoveUntil(Routes.homeScreen,
+              predicate: (route) => false);
         }
       },
       child: const LoginScreenBody(),
