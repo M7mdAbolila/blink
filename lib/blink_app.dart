@@ -18,7 +18,7 @@ class BlinkApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         onGenerateRoute: appRouter.generateRoute,
-        initialRoute: Routes.loginScreen,
+        initialRoute: Routes.onboardingScreen,
       ),
     );
   }

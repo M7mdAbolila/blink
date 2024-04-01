@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
           context.pop();
           setState(() {});
           if (state.errMessaeg == '1') {
-            customSnackBar(context, 'Wrong Username or password');
+            customSnackBar(context, 'Wrong Email or password');
           } else {
             customSnackBar(context, state.errMessaeg);
           }

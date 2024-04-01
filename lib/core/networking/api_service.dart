@@ -7,7 +7,7 @@ class ApiService {
   ApiService(this._dio);
   final headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'api_key': "ElGamdeeeenFash5",
+    'x-api-key': "ElGamdeeeenFash5",
   };
   // Future<Map<String, dynamic>>
   Future post(
