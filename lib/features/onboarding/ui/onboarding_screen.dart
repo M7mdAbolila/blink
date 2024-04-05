@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'widgets/onboarding_bottom_section.dart';
 import 'widgets/onboarding_page_one.dart';
@@ -18,29 +19,34 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool isFirstScreen = true;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          padding: EdgeInsets.only(bottom: 170.h, right: 20.w, left: 20.w),
-          child: PageView(
-            controller: pageController,
-            children: const [
-              OnboardingPageOne(),
-              OnboardingPageTwo(),
-              OnboardingPageThree(),
-            ],
-            onPageChanged: (page) {
-              setState(() {
-                isLastScreen = (page == 2);
-                isFirstScreen = (page == 0);
-              });
-            },
+    return PopScope(
+      onPopInvoked: (didPop) {
+        SystemNavigator.pop();
+      },
+      child: SafeArea(
+        child: Scaffold(
+          body: Container(
+            padding: EdgeInsets.only(bottom: 170.h, right: 20.w, left: 20.w),
+            child: PageView(
+              controller: pageController,
+              children: const [
+                OnboardingPageOne(),
+                OnboardingPageTwo(),
+                OnboardingPageThree(),
+              ],
+              onPageChanged: (page) {
+                setState(() {
+                  isLastScreen = (page == 2);
+                  isFirstScreen = (page == 0);
+                });
+              },
+            ),
           ),
-        ),
-        bottomSheet: OnboardingBottomSection(
-          pageController: pageController,
-          isLastScreen: isLastScreen,
-          isFirstScreen: isFirstScreen,
+          bottomSheet: OnboardingBottomSection(
+            pageController: pageController,
+            isLastScreen: isLastScreen,
+            isFirstScreen: isFirstScreen,
+          ),
         ),
       ),
     );
