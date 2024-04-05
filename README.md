@@ -1,4 +1,4 @@
-# blink2
+# blink
 
 A new Flutter project.
 
